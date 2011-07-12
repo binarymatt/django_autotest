@@ -1,10 +1,10 @@
+import unittest
 from django.conf import settings
 from django.core.management.commands.test import Command as TestCommand
 
 from Growl import GrowlNotifier
 
 class Command(TestCommand):
-
     def handle(self, *args, **options):
         gn = GrowlNotifier(applicationName='django_test_runner', notifications=["PASS","FAIL"])
         gn.register()
@@ -22,7 +22,6 @@ class Command(TestCommand):
                 gn.notify("FAIL", "Tests Failed","Check the console to see failing tests")
             else:
                 gn.notify("PASS", "Tests Passed","Way to go, you rock!")
-
 
 
         from django.utils import autoreload
